@@ -1,34 +1,374 @@
-DROP PROCEDURE IF EXISTS `init_db`;
-DELIMITER //
-CREATE PROCEDURE init_db()
-BEGIN
-    DECLARE i INT;
-    SET i = 0;
-    WHILE i < 1000 DO
-      SET @drop_table = concat('DROP TABLE IF EXISTS url_mapping_', i);
-      PREPARE drop_table FROM @drop_table;
-      EXECUTE drop_table;
-
-      SET @create_table = concat(
-          'CREATE TABLE url_mapping_', i,
-          '(
-            id BIGINT AUTO_INCREMENT PRIMARY KEY,
-            url VARCHAR(255)
-          ) ENGINE = InnoDB, AUTO_INCREMENT = ', i, ', CHARSET utf8 COLLATE utf8_general_ci');
-      PREPARE create_table FROM @create_table;
-      EXECUTE create_table;
-
-      SET i = i + 1;
-    END WHILE;
-
-    DROP TABLE IF EXISTS initial_code;
-    CREATE TABLE initial_code
+    DROP TABLE IF EXISTS logistics_cost;
+    CREATE TABLE logistics_cost
     (
-      id BIGINT AUTO_INCREMENT PRIMARY KEY
+      id int(11) AUTO_INCREMENT PRIMARY KEY, 
+      logistics_company  varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+      Logistics_type  varchar(20) COLLATE utf8_unicode_ci NOT NULL,  
+      destination  varchar(20) COLLATE utf8_unicode_ci NOT NULL,  
+      price float(7,2),
+      handling_fee float(7,2),      
+	  trigger_condition varchar(100) COLLATE utf8_unicode_ci,
+	  weight_count varchar(100) COLLATE utf8_unicode_ci
     ) ENGINE = InnoDB;
-END//
-DELIMITER ;
+   
+ 
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','爱尔兰',53,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','爱沙尼亚',47,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','奥地利',72,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','澳大利亚',50,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','巴西',87,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','白俄罗斯',53,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','比利时',63,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','冰岛',100,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','波兰',55,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','丹麦',57,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','德国',47,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','俄罗斯',51,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','法国',60,12.9,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','芬兰',60,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','荷兰',55,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','加拿大',50,21,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','捷克',50,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','克罗地亚',83,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','拉脱维亚',45,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','立陶宛',43,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','美国',65,12.9,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','摩尔多瓦',91,21,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','墨西哥',58,21,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','挪威',51,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','葡萄牙',45,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','瑞典',50,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','瑞士',50,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','斯洛伐克',45,16,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','斯洛文尼亚',53,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','泰国',26,16,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','土耳其',85,16,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','乌克兰',67,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','西班牙',50,16,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','新西兰',60,8,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','匈牙利',52,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','以色列',50,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','意大利',53,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','印度',65,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','英国',52,18,'weight>0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','智利',80,18,'weight>0.5','');   
 
-CALL init_db();
 
-GRANT ALL PRIVILEGES ON short_url.* TO root@192.168.1.101 IDENTIFIED BY '1235';
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','爱尔兰',58,21,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','爱沙尼亚',52,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','奥地利',77,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','澳大利亚',55,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','巴西',92,18,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','白俄罗斯',58,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','比利时',68,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','冰岛',105,18,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','波兰',60,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','丹麦',62,18,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','德国',52,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','俄罗斯',56,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','法国',60,12.9,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','芬兰',75,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','荷兰',58,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','加拿大',58,18,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','捷克',55,18,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','克罗地亚',88,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','拉脱维亚',50,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','立陶宛',48,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','美国',68,10.9,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','摩尔多瓦',93,18,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','墨西哥',60,21,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','挪威',56,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','葡萄牙',50,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','瑞典',55,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','瑞士',55,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','斯洛伐克',45,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','斯洛文尼亚',55,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','泰国',26,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','土耳其',86,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','乌克兰',72,18,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','西班牙',50,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','新西兰',60,8,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','匈牙利',57,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','以色列',55,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','意大利',68,18,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','印度',70,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','英国',68,16,'weight<=0.5','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','燕文航空小包（普货）','智利',85,16,'weight<=0.5','');   
+
+
+
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','英国',55,22,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','巴西',62,19,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','加拿大',55,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','法国',51,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','德国',51,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','以色列',51,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','意大利',51,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','荷兰',51,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','挪威',51,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','俄罗斯',52,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','西班牙',51,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','瑞典',51,26,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','美国',58,26,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','奥地利',92,13,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','白俄罗斯',93,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','比利时',92,13,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','克罗地亚',93,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','捷克',93,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','爱沙尼亚',93,14,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','芬兰',93,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','匈牙利',92,14,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','印度',96,14,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','爱尔兰',91,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','拉脱维亚',93,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','立陶宛',93,14,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','摩尔多瓦',91,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','波兰',93,14,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','葡萄牙',91,14,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','斯洛文尼亚',94,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','南非',97,14,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','瑞士',91,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','泰国',99,14,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','土耳其',88,14,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','土耳其小包','乌克兰',91,20,'','');   
+
+
+
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','奥地利',64,23,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','比利时',57,23,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','克罗地亚',64,22,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','捷克',53,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','丹麦',62,23,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','爱沙尼亚',63,21,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','芬兰',64,23,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','法国',55,24,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','德国',58,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','希腊',83,24,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','匈牙利',62,24,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','冰岛',74,23,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','爱尔兰',72,23,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','意大利',65,24,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','拉脱维亚',62,21,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','立陶宛',61,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','挪威',59,39,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','波兰',63,22,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','葡萄牙',72,24,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','罗马尼亚',63,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','俄罗斯',62,21,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','斯洛伐克',74,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','斯洛文尼亚',47,37,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','西班牙',67,28,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','瑞典',64,24,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','瑞士',59,22,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','土耳其',60,21,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','乌克兰',79,21,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','英国',59,27,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','阿根廷',85,21,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','澳大利亚',95,23,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','巴西',93,21,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','加拿大',80,22,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','智利',93,21,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','以色列',71,23,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','日本',73,23,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','墨西哥',75,21,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','新西兰',114,23,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','沙特阿拉伯',118,15,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','南非',105,15,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','秘鲁',136,16,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','哥伦比亚',136,16,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','厄瓜多尔',136,16,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','保加利亚',107,15,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','摩尔多瓦',107,15,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','尼日利亚',123,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','哥斯达黎加',119,16,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','塞浦路斯',125,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','白俄罗斯',108,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','埃及',111,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','印度',120,18,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','卢森堡',49,30,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','马耳他',112,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','科威特',105,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','马来西亚',106,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','卡塔尔',117,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','新加坡',68,23,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','韩国',77,23,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','泰国',107,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','阿联酋',105,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','美国',73,24,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','荷兰小包','世界其它国家',127,18,'','');   
+
+
+
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','奥地利',50,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','克罗地亚',61,16,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','捷克共和国',48,19,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','丹麦',67,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','芬兰',61,34,'','');    
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','匈牙利',50,20,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','爱尔兰',55,27,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','荷兰',53,21,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','挪威',68,21,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','波兰',54,19,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','葡萄牙',67,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','斯洛文尼亚',54,22,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','西班牙',89,15,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','瑞士',57,26,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','英国',58,18,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','意大利',57,23,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','土耳其',68,19,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','乌克兰',105,14,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','瑞典',65,18,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','俄罗斯',50,24,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','斯洛伐克',79,16,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','以色列',68,21,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','希腊',66,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','法国',68,18,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','比利时',68,18,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','美国',81,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','加拿大',78,21,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','巴西',79,19,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','智利',114,14,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','墨西哥',71,24,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','澳大利亚',93,27,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','新西兰',61,21,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','泰国',38,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','印度尼西亚',79,14,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','菲律宾',79,14,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','越南',79,14,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','马来西亚',37,19,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','新加坡',22,24,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','日本',89,3,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','世界其他地区',115,14,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','德国',70,16,'weight<=0.4','');
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','DHL小包(香港)','德国',58,21,'weight>0.4','');   
+
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','印度尼西亚',97,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','印度',97,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','柬埔寨',97,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','北韩',97,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','南韩',97,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','斯里兰卡',97,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','马尔代夫',97,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','马来西亚',97,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','菲律宾',97,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','巴基斯坦',97,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','新加坡',97,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','泰国',97,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','台湾',97,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','越南',97,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','阿拉伯联合酋长国',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','奥地利',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','澳大利亚(澳洲)',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','阿塞拜疆',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','比利时',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','巴林(王国)',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','加拿大',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','瑞士',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','哥斯达黎加',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','塞浦路斯',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','德国',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','西班牙',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','法国',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','英国',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','格陵兰',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','希腊',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','爱尔兰',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','以色列',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','伊朗',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','意大利',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','约旦',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','日本',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','科威特',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','哈萨克',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','黎巴嫩',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','列支敦士登',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','卢森堡',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','摩纳哥',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','蒙古',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','马耳他',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','墨西哥',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','荷兰',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','新西兰',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','阿曼',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','巴布亚新几内亚',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','波多黎各',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','葡萄牙',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','卡塔尔',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','沙地阿拉伯',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','阿拉伯叙利亚共和国(叙利亚)',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','塔吉克',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','土库曼',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','土耳其',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','美国',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','乌兹别克',113,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','阿根廷',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','保加利亚',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','玻利维亚',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','巴西',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','白俄罗斯',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','智利',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','哥伦比亚',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','捷克共和国',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','丹麦',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','爱沙尼亚',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','芬兰',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','克罗地亚',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','匈牙利',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','冰岛',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','立陶宛',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','拉脱维亚',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','利比亚',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','挪威',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','秘鲁',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','波兰',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','巴拉圭',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','罗马尼亚',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','塞尔维亚',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','俄罗斯(俄罗斯联邦)',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','瑞典',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','斯洛文尼亚',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','斯洛伐克',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','塞拉利昂',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','塞内加尔',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','斯威士兰',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','乌克兰',132,12,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','香港挂号小包','委内瑞拉(玻利瓦尔共和国)',132,12,'','');   
+
+
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','美国',80.0,10,'','weight>0.05?weight:0.05');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','乌克兰',75.0,8,'','weight>0.01?weight:0.01');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','俄罗斯',97.0,8,'','weight>0.05?weight:0.05');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','新西兰',70.0,9,'','weight>0.05?weight:0.05');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','日本',40.0,12,'','weight>0.05?weight:0.05');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','巴西',80.0,25,'','weight>0.05?weight:0.05');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','西班牙',60.0,14,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','加拿大',70.0,19,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','以色列',60.0,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','英国',65.0,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','法国',60.0,19,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','德国',60.0,19,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','挪威',65.0,19,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','澳大利亚',60.0,19,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','沙特阿拉伯',50.0,26,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','中国香港',30.0,17,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','瑞典',60.0,19,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','韩国',40.0,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','马来西亚',40.0,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','新加坡',40.0,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','奥地利',60.0,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','比利时',60.0,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','瑞士',60.0,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','丹麦',60.0,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','匈牙利',60.0,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','意大利',60.0,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','卢森堡',60.0,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','波兰',60.0,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','土耳其',60.0,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','荷兰',60.0,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','芬兰',65.0,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','爱尔兰',65.0,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','葡萄牙',65.0,25,'','');   
+INSERT INTO logistics_cost(logistics_company,Logistics_type,destination,price,handling_fee,trigger_condition,weight_count) VALUE('燕文物流华南报价','国际E邮宝','墨西哥',85.0,25,'','');   
+
+    
+    
